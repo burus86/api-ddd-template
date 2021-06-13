@@ -1,0 +1,20 @@
+#index:
+#    path: /api/v1/user/
+#    controller: App\Core\Infrastructure\Controller\user\GetUsersController::__invoke
+#    methods: GET
+#search:
+#    path: /api/v1/user/search
+#    controller: App\Core\Infrastructure\Controller\User\SearchUsersController::__invoke
+#    methods: GET
+#import:
+#    path: /api/v1/user/import
+#    controller: App\Core\Infrastructure\Controller\User\ImportUserController::__invoke
+#    methods: GET
+#update:
+#    path: /api/v1/user/{id}/update
+#    controller: App\Core\Infrastructure\Controller\User\UpdateUserController::__invoke
+#    methods: PUT
+#show:
+#    path: /api/v1/user/{id}
+#    controller: App\Core\Infrastructure\Controller\User\GetUserController::__invoke
+#    methods: GET

@@ -1,0 +1,28 @@
+App\Core\Domain\Model\Security\User:
+    type: entity
+    table: user
+    repositoryClass: App\Core\Infrastructure\Repository\Doctrine\UserRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        fullname:
+            type: string
+            length: 100
+        apiToken:
+            type: string
+            unique: true
+            nullable: true
+        username:
+            type: string
+            unique: true
+            length: 180
+        password:
+            type: string
+        roles:
+            type: json
+        createdAt:
+            type: datetime
+            options: {"default": "CURRENT_TIMESTAMP"}

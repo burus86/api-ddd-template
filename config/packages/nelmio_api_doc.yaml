@@ -1,0 +1,21 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: API Template
+            description: API template description
+            version: 1.0.0
+        components:
+            securitySchemes:
+                api_key:
+                    type: apiKey
+                    in: header
+                    name: X-AUTH-TOKEN
+                    description: A valid api_token value from user table
+        security:
+            api_key: []
+    areas: # to filter documented areas
+        path_patterns:
+            - ^/api(?!/doc$) # Accepts routes under /api except /api/doc
+    models:
+        names:
+            - {alias: User, type: App\Core\Domain\Model\Security\User }
