@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Core\Infrastructure\Repository\Doctrine;
 
 use App\Core\Domain\Model\Security\User;

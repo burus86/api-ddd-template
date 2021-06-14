@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Shared\Infrastructure\Repository\Doctrine;
 
 use App\Shared\Domain\Repository\BaseEntityRepositoryInterface;
