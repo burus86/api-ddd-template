@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Shared\Infrastructure\Controller;
 
 use App\Shared\Infrastructure\Controller\Traits\JsonResponseHelpersControllerTrait;

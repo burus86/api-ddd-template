@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Core\Domain\Model\Security;
 
 use App\Shared\Domain\Model\AbstractEntity;

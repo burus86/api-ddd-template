@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Core\Application\Service\Security;
 
 use App\Core\Domain\Repository\UserRepositoryInterface;

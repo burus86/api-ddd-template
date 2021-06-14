@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Core\Domain\Exception\Security;
 
 use App\Shared\Domain\Interfaces\ResponseHttpCode;
