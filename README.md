@@ -65,6 +65,7 @@ All API endpoints require a `X-AUTH-TOKEN` in header, with a value equal to fiel
 
 ## Future improvements
 
+- [ ] **[Upgrade Symfony](https://symfony.com/releases)** to latest stable version: 5.3
 - [ ] Add docker configuration files
 - [ ] Add **[JWT authentication](https://github.com/lexik/LexikJWTAuthenticationBundle)**, which replace current API Key defined in user
 - [ ] Create **[application tests](https://symfony.com/doc/current/testing.html#application-tests)**, to check the integration of all the different layers of the application.
