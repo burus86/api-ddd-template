@@ -20,10 +20,15 @@ abstract class BaseEntityRepository extends ServiceEntityRepository implements B
     use EntityManagerCustomMethodsRepositoryTrait;
     use QueryBuilderCustomMethodsRepositoryTrait;
 
+    /** @var string */
     protected $entityClass;
+    /** @var array<string> */
     protected $filterFieldsAllowed;
+    /** @var array<string> */
     protected $sortFieldsAllowed;
+    /** @var array<string> */
     protected $sortOrdersAllowed = array('ASC', 'DESC');
+    /** @var string */
     protected $sortOrderDefault = 'ASC';
     /** @var QueryBuilder */
     protected $queryBuilder;

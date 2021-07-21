@@ -17,7 +17,7 @@ trait RequestHelpersControllerTrait
 {
     /**
      * @param Request $request
-     * @return array
+     * @return array<string, mixed>
      */
     protected function getRequestFilters(Request $request): array
     {
@@ -33,7 +33,7 @@ trait RequestHelpersControllerTrait
 
     /**
      * @param Request $request
-     * @return array
+     * @return array<string, mixed>
      */
     protected function getRequestOrderBy(Request $request): array
     {

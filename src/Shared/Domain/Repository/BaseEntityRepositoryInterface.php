@@ -24,11 +24,11 @@ interface BaseEntityRepositoryInterface
         self::COMPARISON_CONDITION_ENDS
     ];
 
-    public function insert(BaseEntityInterface $entity);
+    public function insert(BaseEntityInterface $entity): void;
 
-    public function update();
+    public function update(): void;
 
-    public function delete(BaseEntityInterface $entity);
+    public function delete(BaseEntityInterface $entity): void;
 
     /**
      * @param string $fieldName
