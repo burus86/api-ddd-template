@@ -18,7 +18,7 @@ trait EntityManagerCustomMethodsRepositoryTrait
      * @param BaseEntityInterface $entity
      * @throws PersisterException
      */
-    public function insert(BaseEntityInterface $entity)
+    public function insert(BaseEntityInterface $entity): void
     {
         try {
             $this->getEntityManager()->persist($entity);
@@ -31,7 +31,7 @@ trait EntityManagerCustomMethodsRepositoryTrait
     /**
      * @throws PersisterException
      */
-    public function update()
+    public function update(): void
     {
         try {
             $this->getEntityManager()->flush();
@@ -44,7 +44,7 @@ trait EntityManagerCustomMethodsRepositoryTrait
      * @param BaseEntityInterface $entity
      * @throws PersisterException
      */
-    public function delete(BaseEntityInterface $entity)
+    public function delete(BaseEntityInterface $entity): void
     {
         try {
             $this->getEntityManager()->remove($entity);

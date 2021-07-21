@@ -16,7 +16,7 @@ final class InvalidSortFieldException extends InvalidArgumentException
     /**
      * InvalidSortFieldException constructor.
      * @param string $field
-     * @param array $options
+     * @param array<string> $options
      */
     public function __construct(string $field, array $options)
     {

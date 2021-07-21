@@ -16,12 +16,13 @@ use Symfony\Component\HttpFoundation\Response;
 trait JsonResponseHelpersControllerTrait
 {
     /**
-     * @param array $data
+     * @param array<string, mixed> $data
      * @param int|null $status
      * @return JsonResponse
      */
-    protected function getApiSuccessJsonResponse(array $data, ?int $status = Response::HTTP_OK): JsonResponse
+    protected function getApiSuccessJsonResponse(array $data, ?int $status = null): JsonResponse
     {
+        $status = $status ?? Response::HTTP_OK;
         return $this->getApiJsonResponse($data, $status, $success = true);
     }
 
@@ -52,14 +53,15 @@ trait JsonResponseHelpersControllerTrait
      */
     protected function getApiErrorJsonResponse(
         Exception $exception,
-        ?int $status = Response::HTTP_BAD_REQUEST
+        ?int $status = null
     ): JsonResponse {
+        $status = $status ?? Response::HTTP_BAD_REQUEST;
         $data = array('message' => $exception->getMessage());
         return $this->getApiJsonResponse($data, $status, $success = false);
     }
 
     /**
-     * @param array $data
+     * @param array<string, mixed> $data
      * @param int $status
      * @param bool|null $success
      * @return JsonResponse

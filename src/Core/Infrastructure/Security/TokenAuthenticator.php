@@ -21,6 +21,7 @@ use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
  */
 class TokenAuthenticator extends AbstractGuardAuthenticator
 {
+    /** @var EntityManagerInterface */
     private $em;
 
     public function __construct(EntityManagerInterface $em)
@@ -44,7 +45,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
      * Called on every request. Return whatever credentials you want to
      * be passed to getUser() as $credentials.
      * @param Request $request
-     * @return array|string|null
+     * @return mixed|null
      */
     public function getCredentials(Request $request)
     {

@@ -15,10 +15,15 @@ use function count;
 
 class Paginator implements PaginatorInterface
 {
+    /** @var DoctrineQueryBuilder */
     private $queryBuilder;
+    /** @var int */
     private $currentPage;
+    /** @var int */
     private $pageSize;
+    /** @var Traversable */
     private $results;
+    /** @var int */
     private $numResults;
 
     public function __construct(DoctrineQueryBuilder $queryBuilder, int $pageSize = self::PAGE_SIZE)
@@ -27,7 +32,7 @@ class Paginator implements PaginatorInterface
         $this->pageSize = $pageSize;
     }
 
-    public function paginate(int $page = self::CURRENT_PAGE): self
+    public function paginate(int $page = self::CURRENT_PAGE): PaginatorInterface
     {
         $this->currentPage = max(1, $page);
         $firstResult = ($this->currentPage - 1) * $this->pageSize;

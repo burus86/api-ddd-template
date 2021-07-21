@@ -41,17 +41,17 @@ class User extends AbstractEntity implements UserInterface
 
     /**
      * User constructor.
-     * @param string|null $fullname
-     * @param string|null $apiToken
-     * @param string|null $username
-     * @param string|null $password
+     * @param string $fullname
+     * @param string $apiToken
+     * @param string $username
+     * @param string $password
      * @param array<string>|null $roles
      */
     public function __construct(
-        ?string $fullname = null,
-        ?string $apiToken = null,
-        ?string $username = null,
-        ?string $password = null,
+        string $fullname,
+        string $apiToken,
+        string $username,
+        string $password,
         ?array $roles = null
     ) {
         parent::__construct();
@@ -123,7 +123,7 @@ class User extends AbstractEntity implements UserInterface
     /**
      * @see UserInterface
      */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;

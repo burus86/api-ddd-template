@@ -19,7 +19,7 @@ class UserFixturesTest extends KernelTestCase
     private const FIRST_USER_USERNAME = 'juanjesus.gomeznoya';
     private const LAST_USER_FULLNAME = 'Administrator';
 
-    public function testLoad()
+    public function testLoad(): void
     {
         $fixtures = $this->loadFixtures([UserFixtures::class])->getReferenceRepository();
         $users = $fixtures->getManager()->getRepository(User::class)->findAll();
