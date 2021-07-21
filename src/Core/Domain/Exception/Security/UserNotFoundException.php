@@ -15,10 +15,10 @@ final class UserNotFoundException extends InvalidArgumentException
 {
     /**
      * UserNotFoundException constructor.
-     * @param string $id
+     * @param int $id
      */
-    public function __construct(string $id)
+    public function __construct(int $id)
     {
-        parent::__construct(sprintf('User with id %s not found', $id), $code = ResponseHttpCode::HTTP_NOT_FOUND);
+        parent::__construct(sprintf('User with id %d not found', $id), $code = ResponseHttpCode::HTTP_NOT_FOUND);
     }
 }

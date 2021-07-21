@@ -32,7 +32,8 @@ class UserFixtures extends Fixture
     private function getUserData(): array
     {
         return [
-            ['Juan Jesús Gómez Noya', 'cU70Sbr0qKrUQHE0tw60XQVMwBP8hJrdRMY61xhX', 'juanjesus.gomeznoya', 'root.2021', ['ROLE_SUPER_ADMIN']],
+            ['Juan Jesús Gómez Noya', 'cU70Sbr0qKrUQHE0tw60XQVMwBP8hJrdRMY61xhX', 'juanjesus.gomeznoya', 'root.2021',
+                ['ROLE_SUPER_ADMIN']],
             ['Administrator', 'WZzRhP2UdIeEDZCAtO2V4uFtRzFrKx3MMfq5iEsX', 'admin', 'admin.2021', ['ROLE_ADMIN']],
         ];
     }

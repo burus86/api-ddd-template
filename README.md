@@ -5,6 +5,7 @@
 1. [Configure environment variables and create database](#configure-environmment-variables-and-create-database)
 1. [Run project](#run-project)
 1. [Run Tests](#run-tests)
+1. [Code Quality Checker Tools](#code-quality-checker-tools)
 1. [Future improvements](#future-improvements)
 
 ## About project
@@ -13,6 +14,7 @@
 - [x] DDD and Hexagonal architecture
 - [x] Best practices: Clean code, PHP Standards Recommendations (PSR), SOLID principles and design patterns
 - [x] Unit testing
+- [x] Installed Code Quality Checker Tools: PHP_CodeSniffer, PHPStan, PHP Mess Detector, Twigcs
 - [x] Exceptions handler
 - [x] Database full dump with test data included in `migrations` folder
 
@@ -61,7 +63,32 @@ All API endpoints require a `X-AUTH-TOKEN` in header, with a value equal to fiel
 
 ## Run Tests
 
+### [PHP Unit](https://github.com/sebastianbergmann/phpunit)
+
     vendor/bin/phpunit
+
+## Code Quality Checker Tools
+
+- https://thevaluable.dev/code-quality-check-tools-php/
+- https://github.com/collections/code-quality-in-php
+
+### [PHP_CodeSniffer](https://github.com/squizlabs/php_codesniffer)
+
+    vendor/bin/phpcs src/ tests/
+    vendor/bin/phpcbf src/ tests/
+
+### [PHPStan](https://github.com/phpstan/phpstan)
+
+    vendor/bin/phpstan analyse -l 1 src tests --generate-baseline
+    vendor/bin/phpstan analyse -l 8 src tests --generate-baseline
+
+### [PHP Mess Detector](https://github.com/phpmd/phpmd)
+
+    vendor/bin/phpmd src/ text "cleancode,codesize,controversial,design,naming,unusedcode"
+
+### [Twigcs](https://github.com/friendsoftwig/twigcs)
+
+    vendor/bin/twigcs templates/
 
 ## Future improvements
 

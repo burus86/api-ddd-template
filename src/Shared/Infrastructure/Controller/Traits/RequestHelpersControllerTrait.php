@@ -77,7 +77,10 @@ trait RequestHelpersControllerTrait
         foreach ($params as $field => $value) {
             if ($value && strcmp($field, $pageParam) === 0) {
                 if (!filter_var($value, FILTER_VALIDATE_INT)) {
-                    throw new InvalidArgumentException("{$pageParam} value must be an integer!", $code = Response::HTTP_BAD_REQUEST);
+                    throw new InvalidArgumentException(
+                        "{$pageParam} value must be an integer!",
+                        $code = Response::HTTP_BAD_REQUEST
+                    );
                 }
                 return $value;
             }

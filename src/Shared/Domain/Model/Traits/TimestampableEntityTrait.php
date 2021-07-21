@@ -13,11 +13,11 @@ use DateTime;
 trait TimestampableEntityTrait
 {
     /**
-     * @var DateTime
+     * @var DateTime|null
      */
     protected $createdAt;
 
-    public function getCreatedAt(): DateTime
+    public function getCreatedAt(): ?DateTime
     {
         return $this->createdAt;
     }
