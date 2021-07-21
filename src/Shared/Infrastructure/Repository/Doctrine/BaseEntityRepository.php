@@ -17,6 +17,9 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 abstract class BaseEntityRepository extends ServiceEntityRepository implements BaseEntityRepositoryInterface
 {
+    use EntityManagerCustomMethodsRepositoryTrait;
+    use QueryBuilderCustomMethodsRepositoryTrait;
+
     protected $entityClass;
     protected $filterFieldsAllowed;
     protected $sortFieldsAllowed;
@@ -24,8 +27,6 @@ abstract class BaseEntityRepository extends ServiceEntityRepository implements B
     protected $sortOrderDefault = 'ASC';
     /** @var QueryBuilder */
     protected $queryBuilder;
-
-    use EntityManagerCustomMethodsRepositoryTrait, QueryBuilderCustomMethodsRepositoryTrait;
 
     /**
      * BaseEntityRepository constructor.

@@ -18,7 +18,10 @@ interface BaseEntityRepositoryInterface
     public const COMPARISON_CONDITION_STARTS = "STARTS";
     public const COMPARISON_CONDITION_ENDS = "ENDS";
     public const COMPARISON_CONDITIONS_ALLOWED = [
-        self::COMPARISON_CONDITION_EQUALS, self::COMPARISON_CONDITION_CONTAINS, self::COMPARISON_CONDITION_STARTS, self::COMPARISON_CONDITION_ENDS
+        self::COMPARISON_CONDITION_EQUALS,
+        self::COMPARISON_CONDITION_CONTAINS,
+        self::COMPARISON_CONDITION_STARTS,
+        self::COMPARISON_CONDITION_ENDS
     ];
 
     public function insert(BaseEntityInterface $entity);
@@ -67,7 +70,12 @@ interface BaseEntityRepositoryInterface
      * @return mixed
      * @throws InvalidArgumentException
      */
-    public function addSearchByString(string $fieldName, string $value, ?string $comparisonCondition = null, ?string $fieldPrefix = 'e');
+    public function addSearchByString(
+        string $fieldName,
+        string $value,
+        ?string $comparisonCondition = null,
+        ?string $fieldPrefix = 'e'
+    );
 
     /**
      * @param string $fieldName

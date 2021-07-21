@@ -26,29 +26,48 @@ trait QueryBuilderCustomMethodsRepositoryTrait
         return $this->queryBuilder;
     }
 
-    public function addSearchByStringContains(string $fieldName, string $value, ?string $fieldPrefix = 'e'): QueryBuilder
-    {
-        $this->queryBuilder->andWhere($this->queryBuilder->expr()->like($this->getField($fieldName, $fieldPrefix), sprintf("'%%%s%%'", $value)));
+    public function addSearchByStringContains(
+        string $fieldName,
+        string $value,
+        ?string $fieldPrefix = 'e'
+    ): QueryBuilder {
+        $this->queryBuilder->andWhere(
+            $this->queryBuilder->expr()->like($this->getField($fieldName, $fieldPrefix), sprintf("'%%%s%%'", $value))
+        );
 
         return $this->queryBuilder;
     }
 
-    public function addSearchByStringStartsWith(string $fieldName, string $value, ?string $fieldPrefix = 'e'): QueryBuilder
-    {
-        $this->queryBuilder->andWhere($this->queryBuilder->expr()->like($this->getField($fieldName, $fieldPrefix), sprintf("'%s%%'", $value)));
+    public function addSearchByStringStartsWith(
+        string $fieldName,
+        string $value,
+        ?string $fieldPrefix = 'e'
+    ): QueryBuilder {
+        $this->queryBuilder->andWhere(
+            $this->queryBuilder->expr()->like($this->getField($fieldName, $fieldPrefix), sprintf("'%s%%'", $value))
+        );
 
         return $this->queryBuilder;
     }
 
-    public function addSearchByStringEndsWith(string $fieldName, string $value, ?string $fieldPrefix = 'e'): QueryBuilder
-    {
-        $this->queryBuilder->andWhere($this->queryBuilder->expr()->like($this->getField($fieldName, $fieldPrefix), sprintf("'%%%s'", $value)));
+    public function addSearchByStringEndsWith(
+        string $fieldName,
+        string $value,
+        ?string $fieldPrefix = 'e'
+    ): QueryBuilder {
+        $this->queryBuilder->andWhere(
+            $this->queryBuilder->expr()->like($this->getField($fieldName, $fieldPrefix), sprintf("'%%%s'", $value))
+        );
 
         return $this->queryBuilder;
     }
 
-    public function addSearchByString(string $fieldName, string $value, ?string $comparisonCondition = null, ?string $fieldPrefix = 'e'): QueryBuilder
-    {
+    public function addSearchByString(
+        string $fieldName,
+        string $value,
+        ?string $comparisonCondition = null,
+        ?string $fieldPrefix = 'e'
+    ): QueryBuilder {
         $comparisonCondition = $comparisonCondition ?? self::COMPARISON_CONDITION_STARTS;
         switch ($comparisonCondition) {
             case self::COMPARISON_CONDITION_EQUALS:
@@ -61,12 +80,20 @@ trait QueryBuilderCustomMethodsRepositoryTrait
                 return $this->addSearchByStringEndsWith($fieldName, $value, $fieldPrefix);
             default:
                 $comparisonConditionsAllowed = join(',', self::COMPARISON_CONDITIONS_ALLOWED);
-                throw new InvalidArgumentException(sprintf('Condition value "%s" is not allowed. Options available: %s', $comparisonCondition, $comparisonConditionsAllowed), $code = Response::HTTP_BAD_REQUEST);
+                throw new InvalidArgumentException(sprintf(
+                    'Condition value "%s" is not allowed. Options available: %s',
+                    $comparisonCondition,
+                    $comparisonConditionsAllowed
+                ), $code = Response::HTTP_BAD_REQUEST);
         }
     }
 
-    public function addSearchByFieldInInterval(string $fieldName, $minValue, $maxValue, ?string $fieldPrefix = 'e'): QueryBuilder
-    {
+    public function addSearchByFieldInInterval(
+        string $fieldName,
+        $minValue,
+        $maxValue,
+        ?string $fieldPrefix = 'e'
+    ): QueryBuilder {
         if (!empty($minValue) || !empty($maxValue)) {
             $key = $fieldName;
             $field = $this->getField($fieldName, $fieldPrefix);
@@ -91,7 +118,7 @@ trait QueryBuilderCustomMethodsRepositoryTrait
         $parameter = $parameter ?? 'entity';
         $this->queryBuilder
             ->andWhere($this->queryBuilder->expr()->isNotNull('e'))
-            ->andWhere($this->queryBuilder->expr()->eq('e',":{$parameter}"))
+            ->andWhere($this->queryBuilder->expr()->eq('e', ":{$parameter}"))
             ->setParameter($parameter, $entity)
         ;
 

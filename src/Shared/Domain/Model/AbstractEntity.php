@@ -15,7 +15,8 @@ use DateTime;
  */
 abstract class AbstractEntity implements BaseEntityInterface
 {
-    use IdEntityTrait, TimestampableEntityTrait;
+    use IdEntityTrait;
+    use TimestampableEntityTrait;
 
     /**
      * AbstractEntity constructor.

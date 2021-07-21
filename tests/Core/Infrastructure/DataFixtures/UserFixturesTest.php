@@ -12,12 +12,12 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class UserFixturesTest extends KernelTestCase
 {
-    const TOTAL_IMPORTED = 2;
-    const FIRST_USER_FULLNAME = 'Juan Jesús Gómez Noya';
-    const FIRST_USER_USERNAME = 'juanjesus.gomeznoya';
-    const LAST_USER_FULLNAME = 'Administrator';
-
     use FixturesTrait;
+
+    private const TOTAL_IMPORTED = 2;
+    private const FIRST_USER_FULLNAME = 'Juan Jesús Gómez Noya';
+    private const FIRST_USER_USERNAME = 'juanjesus.gomeznoya';
+    private const LAST_USER_FULLNAME = 'Administrator';
 
     public function testLoad()
     {

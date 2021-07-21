@@ -29,7 +29,7 @@ class User extends AbstractEntity implements UserInterface
     private $username;
 
     /**
-     * @var string|null
+     * @var array<string>|null
      */
     private $roles;
 
@@ -45,10 +45,15 @@ class User extends AbstractEntity implements UserInterface
      * @param string|null $apiToken
      * @param string|null $username
      * @param string|null $password
-     * @param array|null $roles
+     * @param array<string>|null $roles
      */
-    public function __construct(?string $fullname = null, ?string $apiToken = null, ?string $username = null, ?string $password = null, ?array $roles = null)
-    {
+    public function __construct(
+        ?string $fullname = null,
+        ?string $apiToken = null,
+        ?string $username = null,
+        ?string $password = null,
+        ?array $roles = null
+    ) {
         parent::__construct();
         $this->fullname = $fullname;
         $this->apiToken = $apiToken;

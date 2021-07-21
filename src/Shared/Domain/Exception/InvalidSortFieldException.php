@@ -21,6 +21,9 @@ final class InvalidSortFieldException extends InvalidArgumentException
     public function __construct(string $field, array $options)
     {
         $allowedOptions = implode(', ', $options);
-        parent::__construct(sprintf('Sort field by "%s" is invalid. It should be one value from: %s', $field, $allowedOptions), $code = ResponseHttpCode::HTTP_BAD_REQUEST);
+        parent::__construct(
+            sprintf('Sort field by "%s" is invalid. It should be one value from: %s', $field, $allowedOptions),
+            $code = ResponseHttpCode::HTTP_BAD_REQUEST
+        );
     }
 }

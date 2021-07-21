@@ -10,6 +10,7 @@ use Doctrine\ORM\Tools\Pagination\CountWalker;
 use Doctrine\ORM\Tools\Pagination\Paginator as DoctrinePaginator;
 use Exception;
 use Traversable;
+
 use function count;
 
 class Paginator implements PaginatorInterface

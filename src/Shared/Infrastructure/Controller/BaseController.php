@@ -14,10 +14,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 abstract class BaseController extends AbstractController
 {
+    use JsonResponseHelpersControllerTrait;
+    use RequestHelpersControllerTrait;
+
     protected $service;
     protected $loggedUserId;
-
-    use JsonResponseHelpersControllerTrait, RequestHelpersControllerTrait;
 
     /**
      * @param array $collection
