@@ -6,6 +6,7 @@
 1. [Run project](#run-project)
 1. [Run Tests](#run-tests)
 1. [Code Quality Checker Tools](#code-quality-checker-tools)
+1. [Code Analysis Tools](#code-analysis-tools)
 1. [Future improvements](#future-improvements)
 
 ## About project
@@ -15,6 +16,7 @@
 - [x] Best practices: Clean code, PHP Standards Recommendations (PSR), SOLID principles and design patterns
 - [x] Unit testing
 - [x] Installed Code Quality Checker Tools: PHP_CodeSniffer, PHPStan, PHP Mess Detector, Twigcs
+- [x] Installed Code Analysis Tools: Deptrac
 - [x] Exceptions handler
 - [x] Database full dump with test data included in `migrations` folder
 
@@ -89,6 +91,12 @@ All API endpoints require a `X-AUTH-TOKEN` in header, with a value equal to fiel
 ### [Twigcs](https://github.com/friendsoftwig/twigcs)
 
     vendor/bin/twigcs templates/
+
+## Code Analysis Tools
+
+### [Deptrac](https://github.com/qossmic/deptrac)
+
+    vendor/bin/deptrac analyse
 
 ## Future improvements
 
