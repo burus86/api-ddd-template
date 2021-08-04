@@ -1,0 +1,35 @@
+parameters:
+    level: max
+    paths:
+        - src
+        - tests
+    excludes_analyse:
+        - tests/bootstrap.php
+    #checkMissingIterableValueType: false
+    #checkGenericClassInNonGenericObjectType: false
+    #inferPrivatePropertyTypeFromConstructor: true
+    ignoreErrors:
+        -
+            message: "#^Method App\\\\Core\\\\Infrastructure\\\\Pagination\\\\Paginator\\:\\:getResults\\(\\) return type has no value type specified in iterable type Traversable\\.$#"
+            count: 1
+            path: src/Core/Infrastructure/Pagination/Paginator.php
+        -
+            message: "#^Property App\\\\Core\\\\Infrastructure\\\\Pagination\\\\Paginator\\:\\:\\$results type has no value type specified in iterable type Traversable\\.$#"
+            count: 1
+            path: src/Core/Infrastructure/Pagination/Paginator.php
+        -
+            message: "#^Method App\\\\Shared\\\\Domain\\\\Interfaces\\\\PaginatorInterface\\:\\:getResults\\(\\) return type has no value type specified in iterable type Traversable\\.$#"
+            count: 1
+            path: src/Shared/Domain/Interfaces/PaginatorInterface.php
+        -
+            message: "#^Class App\\\\Shared\\\\Infrastructure\\\\Repository\\\\Doctrine\\\\BaseEntityRepository extends generic class Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository but does not specify its types\\: T$#"
+            count: 1
+            path: src/Shared/Infrastructure/Repository/Doctrine/BaseEntityRepository.php
+        -
+            message: "#^Parameter \\#2 \\$entityClass of method Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Repository\\\\ServiceEntityRepository\\<mixed\\>\\:\\:__construct\\(\\) expects class\\-string\\<mixed\\>, string given\\.$#"
+            count: 1
+            path: src/Shared/Infrastructure/Repository/Doctrine/BaseEntityRepository.php
+        -
+            message: "#^Cannot call method getReferenceRepository\\(\\) on Doctrine\\\\Common\\\\DataFixtures\\\\Executor\\\\AbstractExecutor\\|null\\.$#"
+            count: 1
+            path: tests/Core/Infrastructure/DataFixtures/UserFixturesTest.php
