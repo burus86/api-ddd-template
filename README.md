@@ -79,7 +79,7 @@ All API endpoints require a `X-AUTH-TOKEN` in header, with a value equal to fiel
 
 ### [PHPStan](https://github.com/phpstan/phpstan)
 
-    vendor/bin/phpstan analyse -l 1 src tests --generate-baseline
+    vendor/bin/phpstan analyse -c phpstan.neon
     vendor/bin/phpstan analyse -l 8 src tests --generate-baseline
 
 ### [PHP Mess Detector](https://github.com/phpmd/phpmd)
