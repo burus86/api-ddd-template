@@ -55,7 +55,7 @@ jobs:
 
       - name: PHP Mess Detector
         if: ${{ always() }}
-        run: vendor/bin/phpmd src/ text cleancode,codesize,controversial,design,naming,unusedcode
+        run: vendor/bin/phpmd src/ text phpmd.xml
 
       - name: Twigcs (Twig checkstyle)
         if: ${{ always() }}
