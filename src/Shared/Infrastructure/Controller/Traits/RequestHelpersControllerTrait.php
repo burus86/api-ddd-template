@@ -53,7 +53,7 @@ trait RequestHelpersControllerTrait
      */
     protected function getRequestCurrentPage(Request $request): int
     {
-        return $this->getRequestPageParams($request, $pageParam = 'page', $defaultValue = Paginator::CURRENT_PAGE);
+        return $this->getRequestPageParams($request, 'page', Paginator::CURRENT_PAGE);
     }
 
     /**
@@ -62,7 +62,7 @@ trait RequestHelpersControllerTrait
      */
     protected function getRequestPageSize(Request $request): int
     {
-        return $this->getRequestPageParams($request, $pageParam = 'page_size', $defaultValue = Paginator::PAGE_SIZE);
+        return $this->getRequestPageParams($request, 'page_size', Paginator::PAGE_SIZE);
     }
 
     /**
@@ -79,7 +79,7 @@ trait RequestHelpersControllerTrait
                 if (!filter_var($value, FILTER_VALIDATE_INT)) {
                     throw new InvalidArgumentException(
                         "{$pageParam} value must be an integer!",
-                        $code = Response::HTTP_BAD_REQUEST
+                        Response::HTTP_BAD_REQUEST
                     );
                 }
                 return $value;

@@ -61,16 +61,38 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
         return $userProvider->loadUserByUsername($credentials);
     }
 
+    /**
+     * @param mixed $credentials
+     * @param UserInterface $user
+     * @return bool
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
     public function checkCredentials($credentials, UserInterface $user): bool
     {
         return true;
     }
 
+    /**
+     * @param Request $request
+     * @param TokenInterface $token
+     * @param string $providerKey
+     * @return Response|null
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey): ?Response
     {
         return null;
     }
 
+    /**
+     * @param Request $request
+     * @param AuthenticationException $exception
+     * @return Response|null
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
         $data = [
@@ -85,6 +107,8 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
      * @param Request $request
      * @param AuthenticationException|null $authException
      * @return Response
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function start(Request $request, AuthenticationException $authException = null): Response
     {

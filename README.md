@@ -86,7 +86,7 @@ All API endpoints require a `X-AUTH-TOKEN` in header, with a value equal to fiel
 
 ### [PHP Mess Detector](https://github.com/phpmd/phpmd)
 
-    vendor/bin/phpmd src/ text "cleancode,codesize,controversial,design,naming,unusedcode"
+    vendor/bin/phpmd src/ text phpmd.xml
 
 ### [Twigcs](https://github.com/friendsoftwig/twigcs)
 

@@ -79,12 +79,12 @@ trait QueryBuilderCustomMethodsRepositoryTrait
             case self::COMPARISON_CONDITION_ENDS:
                 return $this->addSearchByStringEndsWith($fieldName, $value, $fieldPrefix);
             default:
-                $comparisonConditionsAllowed = join(',', self::COMPARISON_CONDITIONS_ALLOWED);
+                $conditionsAllowed = join(',', self::COMPARISON_CONDITIONS_ALLOWED);
                 throw new InvalidArgumentException(sprintf(
                     'Condition value "%s" is not allowed. Options available: %s',
                     $comparisonCondition,
-                    $comparisonConditionsAllowed
-                ), $code = Response::HTTP_BAD_REQUEST);
+                    $conditionsAllowed
+                ), Response::HTTP_BAD_REQUEST);
         }
     }
 
