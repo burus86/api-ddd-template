@@ -23,7 +23,7 @@ trait JsonResponseHelpersControllerTrait
     protected function getApiSuccessJsonResponse(array $data, ?int $status = null): JsonResponse
     {
         $status = $status ?? Response::HTTP_OK;
-        return $this->getApiJsonResponse($data, $status, $success = true);
+        return $this->getApiJsonResponse($data, $status, true);
     }
 
     /**
@@ -57,7 +57,7 @@ trait JsonResponseHelpersControllerTrait
     ): JsonResponse {
         $status = $status ?? Response::HTTP_BAD_REQUEST;
         $data = array('message' => $exception->getMessage());
-        return $this->getApiJsonResponse($data, $status, $success = false);
+        return $this->getApiJsonResponse($data, $status, false);
     }
 
     /**
@@ -66,7 +66,7 @@ trait JsonResponseHelpersControllerTrait
      * @param bool|null $success
      * @return JsonResponse
      */
-    private function getApiJsonResponse(array $data, int $status, $success = true): JsonResponse
+    private function getApiJsonResponse(array $data, int $status, ?bool $success = null): JsonResponse
     {
         $result = array('success' => $success);
         if (is_array($data) && count($data) > 0) {

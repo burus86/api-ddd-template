@@ -54,6 +54,7 @@ class Paginator implements PaginatorInterface
         try {
             $this->results = $paginator->getIterator();
         } catch (Exception $e) {
+            echo $e->getMessage();
         }
         $this->numResults = $paginator->count();
 
