@@ -4,9 +4,14 @@ name: Continuous Integration
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
+  # Triggers the workflow on push or pull request events but only for certain branches
   push:
-    branches: [ dev ]
+    branches:
+      - dev
+      - ft/*
+      - hotfix/*
+      - tmp/*
+      - v1.*
   pull_request:
     branches: [ main ]
 
@@ -15,9 +20,9 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "quality"
-  quality:
-    name: Quality checks
+  # This workflow contains a single job called "build"
+  build:
+    name: Build project
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -32,8 +37,32 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs single commands using the runners shell
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
+      - run: composer validate --strict
+      - run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Pull images
+        run: docker-compose -f docker/docker-compose.yml pull --ignore-pull-failures || true
+
+      - name: Start services
+        run: docker-compose -f docker/docker-compose.yml up -d --build
+
+      - name: Wait for services
+        run: |
+          while status="$(docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" "$(docker-compose -f docker/docker-compose.yml ps -q php)")"; do
+            case $status in
+              starting) sleep 1;;
+              healthy) exit 0;;
+              unhealthy)
+                docker-compose ps
+                docker-compose logs
+                exit 1
+              ;;
+            esac
+          done
+          exit 1
+
+      - name: Check HTTP reachability
+        run: curl -v -o /dev/null http://localhost:8080
 
       - name: Start and set up MySQL
         run: |
@@ -43,20 +72,40 @@ jobs:
 
       - name: PHP Unit tests
         if: ${{ always() }}
-        run: vendor/bin/phpunit
+        run: bin/phpunit
 
       - name: PHP Code Sniffer
         if: ${{ always() }}
-        run: vendor/bin/phpcs src/ tests/ # --standard=PSR2 src
+        run: bin/phpcs src/ tests/
 
       - name: PHP Stan
         if: ${{ always() }}
-        run: vendor/bin/phpstan analyse -c phpstan.neon
+        run: bin/phpstan analyse -c phpstan.neon
 
       - name: PHP Mess Detector
         if: ${{ always() }}
-        run: vendor/bin/phpmd src/ text phpmd.xml
+        run: bin/phpmd src/ text phpmd.xml
+
+      - name: PHP Magic Number Detector
+        if: ${{ always() }}
+        run: bin/phpmnd src tests --progress --extensions=all
+
+      - name: PHP Copy Paste Detector (PHPCPD)
+        if: ${{ always() }}
+        run: bin/phpcpd ./ --exclude=var --exclude=vendor --fuzzy --min-lines=5
+
+      - name: Churn-php
+        if: ${{ always() }}
+        run: bin/churn run --configuration=churn.yml
+
+      - name: PhpDeprecationDetector
+        if: ${{ always() }}
+        run: bin/phpdd src/ tests/
 
       - name: Twigcs (Twig checkstyle)
         if: ${{ always() }}
-        run: vendor/bin/twigcs templates/
+        run: bin/twigcs templates/
+
+      - name: Deptrac
+        if: ${{ always() }}
+        run: bin/deptrac analyse
