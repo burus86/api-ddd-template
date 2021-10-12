@@ -19,13 +19,13 @@ abstract class BaseController extends AbstractController
     use RequestHelpersControllerTrait;
 
     /** @var ApplicationServiceInterface */
-    protected $service;
+    protected ApplicationServiceInterface $service;
     /** @var int|null */
-    protected $loggedUserId;
+    protected ?int $loggedUserId;
 
     /**
-     * @param array<mixed> $collection
-     * @return array<mixed>
+     * @param array<int, mixed> $collection
+     * @return array<int, mixed>
      */
     protected function renderRecords(array $collection): array
     {

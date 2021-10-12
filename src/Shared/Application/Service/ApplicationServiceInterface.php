@@ -16,5 +16,5 @@ interface ApplicationServiceInterface
      * @param ApplicationRequestInterface $request
      * @return mixed
      */
-    public function execute(ApplicationRequestInterface $request);
+    public function execute(ApplicationRequestInterface $request): mixed;
 }

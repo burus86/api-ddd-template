@@ -7,7 +7,7 @@ namespace App\Core\Infrastructure\Repository\Doctrine;
 use App\Core\Domain\Model\Security\User;
 use App\Core\Domain\Repository\UserRepositoryInterface;
 use App\Shared\Infrastructure\Repository\Doctrine\BaseEntityRepository;
-use Doctrine\ORM\ORMException;
+use Doctrine\ORM\Exception\ORMException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -26,7 +26,7 @@ use function get_class;
 class UserRepository extends BaseEntityRepository implements PasswordUpgraderInterface, UserRepositoryInterface
 {
     /** @var string */
-    protected $entityClass = User::class;
+    protected string $entityClass = User::class;
 
     /**
      * Used to upgrade (rehash) the user's password automatically over time.

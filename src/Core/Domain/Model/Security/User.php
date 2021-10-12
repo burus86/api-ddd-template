@@ -16,27 +16,27 @@ class User extends AbstractEntity implements UserInterface
     /**
      * @var string
      */
-    private $fullname;
+    private string $fullname;
 
     /**
      * @var string
      */
-    private $apiToken;
+    private string $apiToken;
 
     /**
      * @var string
      */
-    private $username;
+    private string $username;
 
     /**
      * @var array<string>|null
      */
-    private $roles;
+    private ?array $roles;
 
     /**
      * @var string The hashed password
      */
-    private $password;
+    private string $password;
 
 
     /**
@@ -79,7 +79,7 @@ class User extends AbstractEntity implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->username;
+        return $this->username;
     }
 
     /**

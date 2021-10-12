@@ -1,0 +1,14 @@
+<?php
+/**
+ * @see https://github.com/friendsoftwig/twigcs#file-based-configuration
+ */
+
+return \FriendsOfTwig\Twigcs\Config\Config::create()
+    ->setName('twigcs-config')
+    ->setSeverity('warning')
+    //->setRuleSet(FriendsOfTwig\Twigcs\Ruleset\Official::class)
+    // Every file matching the pattern will use a different ruleset.
+    ->setSpecificRuleSets([
+        '*/*.html.twig' => App\Shared\Infrastructure\Ruleset\TwigCsRuleset::class,
+    ])
+;

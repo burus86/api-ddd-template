@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UserFixtures extends Fixture
 {
     /** @var UserPasswordEncoderInterface */
-    private $passwordEncoder;
+    private UserPasswordEncoderInterface $passwordEncoder;
 
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -31,7 +31,7 @@ class UserFixtures extends Fixture
     }
 
     /**
-     * @return array<mixed>
+     * @return array<int, mixed>
      */
     private function getUserData(): array
     {

@@ -14,7 +14,7 @@ use App\Shared\Application\Service\ApplicationServiceInterface;
 abstract class UserService implements ApplicationServiceInterface
 {
     /** @var UserRepositoryInterface $repository */
-    protected $repository;
+    protected UserRepositoryInterface $repository;
 
     public function __construct(UserRepositoryInterface $repository)
     {

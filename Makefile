@@ -5,7 +5,7 @@
 
 # variables
 .DEFAULT_GOAL := help
-.PHONY : help start stop install update require bash logs phpdoc test
+.PHONY : help help-symfony start stop install update require bash logs debug-router phpdoc test
 CONTAINERS = api-ddd-template_php api-ddd-template_db
 CONTAINER_NAME = api-ddd-template_php
 CONTAINER_OPTIONS = -it
@@ -34,19 +34,29 @@ help:
 	} \
 	{ lastLine = $$0 }' $(MAKEFILE_LIST)
 
-## Start PHP application
+## Symfony console available commands
+help-symfony: start bin/console
+	@echo "Symfony console available commands"
+	@echo "---------------------------"
+	@echo
+	$(RUN) php bin/console list
+	@echo
+
+## Start docker containers
 start:
-	@echo "Starting PHP application"
+	@echo "Starting docker containers"
 	@echo "---------------------------"
 	@echo
 	docker-compose -f docker/docker-compose.yml up -d --build --remove-orphans
+	@echo
 
-## Stop PHP application
+## Stop docker containers
 stop:
-	@echo "Stopping PHP application"
+	@echo "Stopping docker containers"
 	@echo "---------------------------"
 	@echo
 	docker stop $(CONTAINERS)
+	@echo
 
 ## Install PHP dependencies
 install: start composer.json $(wildcard composer.lock)
@@ -54,6 +64,7 @@ install: start composer.json $(wildcard composer.lock)
 	@echo "---------------------------"
 	@echo
 	$(RUN) composer install
+	@echo
 
 ## Update PHP dependencies
 update: start composer.json $(wildcard composer.lock)
@@ -61,14 +72,15 @@ update: start composer.json $(wildcard composer.lock)
 	@echo "---------------------------"
 	@echo
 	$(RUN) composer update
+	@echo
 
-## Require new PHP dependencies
+## Require new PHP dependencies. Example: make require PACKAGE=phpstan/phpstan ENV=--dev
 require: start composer.json
 	@echo "Require new PHP dependencies:"
 	@echo "---------------------------"
-	@echo "[EXAMPLE] $ make require PACKAGE_NAME=emuse/behat-html-formatter PACKAGE_ENV=--dev"
 	@echo
-	$(RUN) composer require $(PACKAGE_ENV) $(PACKAGE_NAME)
+	$(RUN) composer require $(ENV) $(PACKAGE)
+	@echo
 
 ## Access docker container bash
 bash: start
@@ -82,21 +94,29 @@ logs: start
 	@echo "Show docker container logs"
 	@echo "---------------------------"
 	@echo
-	docker logs -f $(CONTAINER_NAME)
+	docker logs -f -n20 $(CONTAINER_NAME)
+
+## Show all symfony routes or an individual route. Example: make debug-router ROUTE=first_author_vertical
+debug-router: start bin/console
+	@echo "Show all symfony routes or an individual route"
+	@echo "---------------------------"
+	@echo
+	$(RUN) php bin/console debug:router $(ROUTE)
+	@echo
 
 ## Generate full project documentation
-phpdoc: start
+phpdoc: start phpDocumentor.phar
 	@echo "Generate full project documentation"
 	@echo "---------------------------"
 	@echo
-	php phpDocumentor.phar -d src -t public/docs
+	$(RUN) php phpDocumentor.phar -d src -t public/docs
 	@echo
 
-## Run all tests (unit tests, code style, etc.)
-test: start test-phpunit test-phpcs test-phpstan test-phpmd test-phpmnd test-phpcpd test-churn test-phpdd test-deptrac test-twigcs
+## Run all tests (PHP Unit, PHP_CodeSniffer, PHPStan, PHP Mess Detector, Deptrac, ...)
+test: start vendor test-phpunit test-phpcs test-phpstan test-phpmd test-phpmnd test-phpcpd test-churn test-phpdd test-deptrac test-twigcs
 
 ## Run PHP Unit Tests
-test-phpunit: start
+test-phpunit: start bin/phpunit
 	@echo "Run PHP Unit Tests"
 	@echo "---------------------------"
 	@echo
@@ -104,7 +124,7 @@ test-phpunit: start
 	@echo
 
 ## Run PHP_CodeSniffer and detect violations of a defined coding standard
-test-phpcs: start
+test-phpcs: start bin/phpcs
 	@echo "Run PHP_CodeSniffer: phpcs"
 	@echo "---------------------------"
 	@echo
@@ -112,7 +132,7 @@ test-phpcs: start
 	@echo
 
 ## Run PHP_CodeSniffer and automatically correct coding standard violations
-test-phpcbf: start
+test-phpcbf: start bin/phpcbf
 	@echo "Run PHP_CodeSniffer: phpcbf"
 	@echo "---------------------------"
 	@echo
@@ -120,7 +140,7 @@ test-phpcbf: start
 	@echo
 
 ## Run PHPStan
-test-phpstan: start
+test-phpstan: start bin/phpstan
 	@echo "Run PHPStan"
 	@echo "---------------------------"
 	@echo
@@ -128,7 +148,7 @@ test-phpstan: start
 	@echo
 
 ## Run PHP Mess Detector
-test-phpmd: start
+test-phpmd: start bin/phpmd
 	@echo "Run PHP Mess Detector"
 	@echo "---------------------------"
 	@echo
@@ -136,7 +156,7 @@ test-phpmd: start
 	@echo
 
 ## Run PHP Magic Number Detector
-test-phpmnd: start
+test-phpmnd: start bin/phpmnd
 	@echo "Run PHP Magic Number Detector"
 	@echo "---------------------------"
 	@echo
@@ -144,7 +164,7 @@ test-phpmnd: start
 	@echo
 
 ## Run PHP Copy Paste Detector
-test-phpcpd: start
+test-phpcpd: start bin/phpcpd
 	@echo "Run PHP Copy Paste Detector"
 	@echo "---------------------------"
 	@echo
@@ -152,7 +172,7 @@ test-phpcpd: start
 	@echo
 
 ## Run Churn-php
-test-churn: start
+test-churn: start bin/churn
 	@echo "Run Churn-php"
 	@echo "---------------------------"
 	@echo
@@ -160,7 +180,7 @@ test-churn: start
 	@echo
 
 ## Run PhpDeprecationDetector
-test-phpdd: start
+test-phpdd: start bin/phpdd
 	@echo "Run PhpDeprecationDetector"
 	@echo "---------------------------"
 	@echo
@@ -168,7 +188,7 @@ test-phpdd: start
 	@echo
 
 ## Run Deptrac
-test-deptrac: start
+test-deptrac: start bin/deptrac
 	@echo "Run Deptrac"
 	@echo "---------------------------"
 	@echo
@@ -176,7 +196,7 @@ test-deptrac: start
 	@echo
 
 ## Run Twigcs
-test-twigcs: start
+test-twigcs: start bin/twigcs
 	@echo "Run twigcs"
 	@echo "---------------------------"
 	@echo

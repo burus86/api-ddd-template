@@ -31,5 +31,8 @@ interface PaginatorInterface
 
     public function getNumResults(): int;
 
+    /**
+     * @return Traversable<int, mixed>
+     */
     public function getResults(): Traversable;
 }

@@ -7,6 +7,7 @@ namespace App\Tests\Core\Infrastructure\DataFixtures;
 use App\Core\Domain\Model\Security\User;
 use App\Core\Infrastructure\DataFixtures\UserFixtures;
 use DateTimeInterface;
+use Doctrine\Common\DataFixtures\Executor\AbstractExecutor;
 use Liip\TestFixturesBundle\Test\FixturesTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -21,7 +22,9 @@ class UserFixturesTest extends KernelTestCase
 
     public function testLoad(): void
     {
-        $fixtures = $this->loadFixtures([UserFixtures::class])->getReferenceRepository();
+        /** @var AbstractExecutor $abstractExecutor */
+        $abstractExecutor = $this->loadFixtures([UserFixtures::class]);
+        $fixtures = $abstractExecutor->getReferenceRepository();
         $users = $fixtures->getManager()->getRepository(User::class)->findAll();
         $this->assertCount(self::TOTAL_IMPORTED, $users);
         foreach ($users as $user) {

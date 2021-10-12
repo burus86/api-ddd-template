@@ -2,6 +2,7 @@
 
 1. [About project](#about-project)
 1. [Set up project](#set-up-project)
+    * [Prerequisites](#prerequisites)
     * [Installation](#installation)
     * [Configure environment variables](#configure-environment-variables)
     * [Create database](#create-database)
@@ -22,6 +23,7 @@
     * [Deptrac](#deptrac)
 1. [Documentation](#documentation)
 1. [Future improvements](#future-improvements)
+1. [License](#license)
 
 ## About project
 - [x] Symfony 4.4
@@ -38,11 +40,13 @@
 
 ## Set up project
 
-If not already done, [install Docker Compose](https://docs.docker.com/compose/install/) before continue with installation.
+### Prerequisites
+- [Docker & Docker Compose](https://docs.docker.com/compose/install/)
+- [Make](https://www.gnu.org/software/make/): windows users go [here](http://gnuwin32.sourceforge.net/packages/make.htm)
 
 ### Installation
 
-Clone repository:
+Clone repository and move inside:
 
     git clone https://github.com/burus86/api-ddd-template.git
 
@@ -61,6 +65,8 @@ Install composer dependencies:
 Rename filename `.env.dist` as `.env` and edit `DATABASE_URL` value with database parameters
 
 Open filename `.env.test` and edit `DATABASE_URL` value with test database parameters.
+
+**Important:** MySQL docker container, `api-ddd-template_db`, its assigned IP address is `172.23.0.1`
 
 ### Create database
 
@@ -82,7 +88,7 @@ Alternatively, you can either import the `db-api-ddd-template-full.sql` file, in
 
     mysql -uroot -p
 
-    create database db_api_ddd_template;
+    create database if not exists db_api_ddd_template;
 
     exit;
 
@@ -167,7 +173,7 @@ In order to automatically correct coding standard violations, execute:
 
 The easiest way to [generate full project documentation](https://github.com/phpdocumentor/phpdocumentor) is by running the following command:
 
-    php phpDocumentor.phar -d src -t public/docs
+    make phpdoc
 
 Once generated, you can check the documentation under [http://localhost:8080/docs](http://localhost:8080/docs) in your favorite web browser.
 
@@ -183,3 +189,6 @@ Once generated, you can check the documentation under [http://localhost:8080/doc
 - [ ] Install **[serializer component](https://symfony.com/doc/current/components/serializer.html#installation)** to normalize objects as JSON and hide specific fields
 - [ ] Use **[DoctrineMigrationsBundle](https://symfony.com/doc/current/bundles/DoctrineMigrationsBundle/index.html#usage)**
 - [ ] Add **uuid** field for each model and hide id field on JSON responses
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

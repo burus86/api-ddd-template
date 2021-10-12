@@ -26,11 +26,6 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    env:
-      DB_DATABASE: db_api_ddd_template_test
-      DB_USER: root
-      DB_PASSWORD: root
-
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -53,8 +48,8 @@ jobs:
               starting) sleep 1;;
               healthy) exit 0;;
               unhealthy)
-                docker-compose ps
-                docker-compose logs
+                docker-compose -f docker/docker-compose.yml ps
+                docker-compose -f docker/docker-compose.yml logs
                 exit 1
               ;;
             esac
@@ -62,13 +57,14 @@ jobs:
           exit 1
 
       - name: Check HTTP reachability
+        if: ${{ always() }}
         run: curl -v -o /dev/null http://localhost:8080
 
       - name: Start and set up MySQL
+        if: ${{ always() }}
         run: |
-          sudo /etc/init.d/mysql start
-          mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
-          mysql -e 'SHOW DATABASES;' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+          docker exec -it api-ddd-template_php php bin/console doctrine:database:create
+          docker exec api-ddd-template_php php bin/console doctrine:migrations:migrate
 
       - name: PHP Unit tests
         if: ${{ always() }}

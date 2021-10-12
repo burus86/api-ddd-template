@@ -11,6 +11,7 @@
         <ini name="error_reporting" value="-1" />
         <server name="APP_ENV" value="test" force="true" />
         <server name="SHELL_VERBOSITY" value="-1" />
+        <!-- <env name="SYMFONY_DEPRECATIONS_HELPER" value="999999" /> -->
     </php>
 
     <testsuites>
@@ -19,23 +20,39 @@
         </testsuite>
     </testsuites>
 
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
+    <coverage processUncoveredFiles="true">
+        <include>
             <directory suffix=".php">src</directory>
-        </whitelist>
-    </filter>
+        </include>
+    </coverage>
 
     <!-- Run `composer require symfony/phpunit-bridge` before enabling this extension -->
-    <!--
     <listeners>
-        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
+        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener">
+            <!-- set "debug-class-loader" to 0 to disable the DebugClassLoader integration -->
+            <!--
+            <arguments>
+                <array>
+                    <element key="debug-class-loader"><integer>0</integer></element>
+                </array>
+            </arguments>
+            -->
+        </listener>
     </listeners>
-    -->
 
     <!-- Run `composer require symfony/panther` before enabling this extension -->
+    <!-- see https://github.com/symfony/panther#basic-usage -->
     <!--
     <extensions>
         <extension class="Symfony\Component\Panther\ServerExtension" />
+    </extensions>
+    -->
+
+    <!-- Run `composer require -dev dama/doctrine-test-bundle` before enabling this extension -->
+    <!-- see https://github.com/dmaicher/doctrine-test-bundle -->
+    <!--
+    <extensions>
+        <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension" />
     </extensions>
     -->
 </phpunit>

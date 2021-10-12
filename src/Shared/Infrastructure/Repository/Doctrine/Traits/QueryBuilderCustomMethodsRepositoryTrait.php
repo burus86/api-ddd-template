@@ -19,7 +19,7 @@ trait QueryBuilderCustomMethodsRepositoryTrait
     {
         $key = $fieldName;
         $this->queryBuilder
-            ->andWhere($this->queryBuilder->expr()->eq($this->getField($fieldName, $fieldPrefix), ":{$key}"))
+            ->andWhere($this->queryBuilder->expr()->eq($this->getField($fieldName, $fieldPrefix), ":$key"))
             ->setParameter($key, $value)
         ;
 
@@ -84,14 +84,14 @@ trait QueryBuilderCustomMethodsRepositoryTrait
                     'Condition value "%s" is not allowed. Options available: %s',
                     $comparisonCondition,
                     $conditionsAllowed
-                ), Response::HTTP_BAD_REQUEST);
+                ), code: Response::HTTP_BAD_REQUEST);
         }
     }
 
     public function addSearchByFieldInInterval(
         string $fieldName,
-        $minValue,
-        $maxValue,
+        mixed $minValue,
+        mixed $maxValue,
         ?string $fieldPrefix = 'e'
     ): QueryBuilder {
         if (!empty($minValue) || !empty($maxValue)) {
@@ -100,13 +100,13 @@ trait QueryBuilderCustomMethodsRepositoryTrait
             $this->queryBuilder->andWhere($this->queryBuilder->expr()->isNotNull($field));
             if (!empty($minValue)) {
                 $this->queryBuilder
-                    ->andWhere($this->queryBuilder->expr()->gte($field, ":min_{$key}"))
-                    ->setParameter("min_{$key}", $minValue);
+                    ->andWhere($this->queryBuilder->expr()->gte($field, ":min_$key"))
+                    ->setParameter("min_$key", $minValue);
             }
             if (!empty($maxValue)) {
                 $this->queryBuilder
-                    ->andWhere($this->queryBuilder->expr()->lte($field, ":max_{$key}"))
-                    ->setParameter("max_{$key}", $maxValue);
+                    ->andWhere($this->queryBuilder->expr()->lte($field, ":max_$key"))
+                    ->setParameter("max_$key", $maxValue);
             }
         }
 
@@ -118,7 +118,7 @@ trait QueryBuilderCustomMethodsRepositoryTrait
         $parameter = $parameter ?? 'entity';
         $this->queryBuilder
             ->andWhere($this->queryBuilder->expr()->isNotNull('e'))
-            ->andWhere($this->queryBuilder->expr()->eq('e', ":{$parameter}"))
+            ->andWhere($this->queryBuilder->expr()->eq('e', ":$parameter"))
             ->setParameter($parameter, $entity)
         ;
 
@@ -139,6 +139,6 @@ trait QueryBuilderCustomMethodsRepositoryTrait
     private function getField(string $fieldName, ?string $fieldPrefix = 'e'): string
     {
         $fieldPrefix = $fieldPrefix ?? 'e';
-        return "{$fieldPrefix}.{$fieldName}";
+        return "$fieldPrefix.$fieldName";
     }
 }

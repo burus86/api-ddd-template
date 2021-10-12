@@ -15,7 +15,7 @@ trait TimestampableEntityTrait
     /**
      * @var DateTime|null
      */
-    protected $createdAt;
+    protected ?DateTime $createdAt;
 
     public function getCreatedAt(): ?DateTime
     {

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Shared\Infrastructure\Controller\Traits;
 
 use App\Shared\Domain\Interfaces\PaginatorInterface;
+use App\Shared\Domain\Interfaces\ResponseHttpCode;
 use Exception;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Trait JsonResponseHelpersControllerTrait
@@ -22,8 +22,9 @@ trait JsonResponseHelpersControllerTrait
      */
     protected function getApiSuccessJsonResponse(array $data, ?int $status = null): JsonResponse
     {
-        $status = $status ?? Response::HTTP_OK;
-        return $this->getApiJsonResponse($data, $status, true);
+        $status = $status ?? ResponseHttpCode::HTTP_OK;
+        $data = array_merge(array('success' => true), $data);
+        return $this->json($data, $status);
     }
 
     /**
@@ -55,24 +56,11 @@ trait JsonResponseHelpersControllerTrait
         Exception $exception,
         ?int $status = null
     ): JsonResponse {
-        $status = $status ?? Response::HTTP_BAD_REQUEST;
-        $data = array('message' => $exception->getMessage());
-        return $this->getApiJsonResponse($data, $status, false);
-    }
-
-    /**
-     * @param array<string, mixed> $data
-     * @param int $status
-     * @param bool|null $success
-     * @return JsonResponse
-     */
-    private function getApiJsonResponse(array $data, int $status, ?bool $success = null): JsonResponse
-    {
-        $result = array('success' => $success);
-        if (is_array($data) && count($data) > 0) {
-            $result = array_merge($result, $data);
-        }
-
-        return $this->json($result, $status);
+        $status = $status ?? ResponseHttpCode::HTTP_BAD_REQUEST;
+        $data = array(
+            'success' => false,
+            'message' => $exception->getMessage()
+        );
+        return $this->json($data, $status);
     }
 }

@@ -14,6 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * Class BaseEntityRepository
  * @package App\Shared\Infrastructure\Repository\Doctrine
+ * @phpstan-ignore-next-line
  */
 abstract class BaseEntityRepository extends ServiceEntityRepository implements BaseEntityRepositoryInterface
 {
@@ -21,17 +22,17 @@ abstract class BaseEntityRepository extends ServiceEntityRepository implements B
     use QueryBuilderCustomMethodsRepositoryTrait;
 
     /** @var string */
-    protected $entityClass;
+    protected string $entityClass;
     /** @var array<string> */
-    protected $filterFieldsAllowed;
+    protected array $filterFieldsAllowed;
     /** @var array<string> */
-    protected $sortFieldsAllowed;
+    protected array $sortFieldsAllowed;
     /** @var array<string> */
-    protected $sortOrdersAllowed = array('ASC', 'DESC');
+    protected array $sortOrdersAllowed = array('ASC', 'DESC');
     /** @var string */
-    protected $sortOrderDefault = 'ASC';
+    protected string $sortOrderDefault = 'ASC';
     /** @var QueryBuilder */
-    protected $queryBuilder;
+    protected QueryBuilder $queryBuilder;
 
     /**
      * BaseEntityRepository constructor.
@@ -39,6 +40,7 @@ abstract class BaseEntityRepository extends ServiceEntityRepository implements B
      */
     public function __construct(ManagerRegistry $registry)
     {
+        /** @phpstan-ignore-next-line */
         parent::__construct($registry, $this->entityClass);
         $this->queryBuilder = $this->createQueryBuilder('e');
     }

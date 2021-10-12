@@ -22,7 +22,7 @@ use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 class TokenAuthenticator extends AbstractGuardAuthenticator
 {
     /** @var EntityManagerInterface */
-    private $em;
+    private EntityManagerInterface $em;
 
     public function __construct(EntityManagerInterface $em)
     {

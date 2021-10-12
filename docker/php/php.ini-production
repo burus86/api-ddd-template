@@ -15,5 +15,5 @@ zend.assertions = -1
 
 [opcache]
 ; only 0 for production environment: https://symfony.com/doc/3.4/performance.html#don-t-check-php-files-timestamps
-opcache.validate_timestamps = 0
-;opcache.huge_code_pages = 1
+opcache.validate_timestamps = Off
+;opcache.huge_code_pages = On

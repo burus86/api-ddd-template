@@ -36,7 +36,7 @@ interface BaseEntityRepositoryInterface
      * @param string|null $fieldPrefix
      * @return mixed
      */
-    public function addSearchByStringEquals(string $fieldName, string $value, ?string $fieldPrefix = 'e');
+    public function addSearchByStringEquals(string $fieldName, string $value, ?string $fieldPrefix = 'e'): mixed;
 
     /**
      * @param string $fieldName
@@ -44,7 +44,7 @@ interface BaseEntityRepositoryInterface
      * @param string|null $fieldPrefix
      * @return mixed
      */
-    public function addSearchByStringContains(string $fieldName, string $value, ?string $fieldPrefix = 'e');
+    public function addSearchByStringContains(string $fieldName, string $value, ?string $fieldPrefix = 'e'): mixed;
 
     /**
      * @param string $fieldName
@@ -52,7 +52,7 @@ interface BaseEntityRepositoryInterface
      * @param string|null $fieldPrefix
      * @return mixed
      */
-    public function addSearchByStringStartsWith(string $fieldName, string $value, ?string $fieldPrefix = 'e');
+    public function addSearchByStringStartsWith(string $fieldName, string $value, ?string $fieldPrefix = 'e'): mixed;
 
     /**
      * @param string $fieldName
@@ -60,7 +60,7 @@ interface BaseEntityRepositoryInterface
      * @param string|null $fieldPrefix
      * @return mixed
      */
-    public function addSearchByStringEndsWith(string $fieldName, string $value, ?string $fieldPrefix = 'e');
+    public function addSearchByStringEndsWith(string $fieldName, string $value, ?string $fieldPrefix = 'e'): mixed;
 
     /**
      * @param string $fieldName
@@ -75,7 +75,7 @@ interface BaseEntityRepositoryInterface
         string $value,
         ?string $comparisonCondition = null,
         ?string $fieldPrefix = 'e'
-    );
+    ): mixed;
 
     /**
      * @param string $fieldName
@@ -84,14 +84,19 @@ interface BaseEntityRepositoryInterface
      * @param string|null $fieldPrefix
      * @return mixed
      */
-    public function addSearchByFieldInInterval(string $fieldName, $minValue, $maxValue, ?string $fieldPrefix = 'e');
+    public function addSearchByFieldInInterval(
+        string $fieldName,
+        mixed $minValue,
+        mixed $maxValue,
+        ?string $fieldPrefix = 'e'
+    ): mixed;
 
     /**
      * @param BaseEntityInterface $entity
      * @param string|null $parameter
      * @return mixed
      */
-    public function addSearchByEntity(BaseEntityInterface $entity, ?string $parameter = null);
+    public function addSearchByEntity(BaseEntityInterface $entity, ?string $parameter = null): mixed;
 
     /**
      * @param string $fieldName
@@ -99,5 +104,5 @@ interface BaseEntityRepositoryInterface
      * @param string|null $fieldPrefix
      * @return mixed
      */
-    public function setOrderByField(string $fieldName, ?string $order = null, ?string $fieldPrefix = 'e');
+    public function setOrderByField(string $fieldName, ?string $order = null, ?string $fieldPrefix = 'e'): mixed;
 }
