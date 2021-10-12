@@ -1,22 +1,17 @@
+.idea/
 
 ###> symfony/framework-bundle ###
 /.env
 /.env.local
 /.env.local.php
 /.env.*.local
+/bin/*
+!/bin/console
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
-
-.idea/
-
-###> symfony/phpunit-bridge ###
-.phpunit
-.phpunit.result.cache
-/phpunit.xml
-###< symfony/phpunit-bridge ###
 
 ###> squizlabs/php_codesniffer ###
 /.phpcs-cache
@@ -26,3 +21,23 @@
 ###> qossmic/deptrac-shim ###
 /.deptrac.cache
 ###< qossmic/deptrac-shim ###
+
+###> bmitch/churn-php ###
+/.churn.cache
+###< bmitch/churn-php ###
+
+###> phpdocumentor/phpdocumentor ###
+/.phpdoc/
+/public/docs/
+###< phpdocumentor/phpdocumentor ###
+
+###> friendsofphp/php-cs-fixer ###
+/.php-cs-fixer.php
+/.php-cs-fixer.dist.php
+/.php-cs-fixer.cache
+###< friendsofphp/php-cs-fixer ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###

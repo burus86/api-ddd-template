@@ -1,30 +1,50 @@
+## see https://github.com/ferrius/ddd-cqrs-example/blob/master/depfile.yaml
+
 paths:
-    - ./src
+  - ./src
 exclude_files:
-    - .*tests.*
+  - .*tests.*
 layers:
-    -
-        name: Domain
-        collectors:
-            -
-                type: className
-                regex: .*Domain.*
-    -
-        name: Application
-        collectors:
-            -
-                type: className
-                regex: .*Application.*
-    -
-        name: Infrastructure
-        collectors:
-            -
-                type: className
-                regex: .*Infrastructure.*
+  - name: SharedDomain
+    collectors:
+      - type: className
+        regex: .*App\\Shared\\Domain\\.*
+  - name: SharedApplication
+    collectors:
+      - type: className
+        regex: .*App\\Shared\\Application\\.*
+  - name: SharedInfrastructure
+    collectors:
+      - type: className
+        regex: .*App\\Shared\\Infrastructure\\.*
+  - name: CoreDomain
+    collectors:
+      - type: className
+        regex: .*App\\Core\\Domain\\.*
+  - name: CoreApplication
+    collectors:
+      - type: className
+        regex: .*App\\Core\\Application\\.*
+  - name: CoreInfrastructure
+    collectors:
+      - type: className
+        regex: .*App\\Core\\Infrastructure\\.*
 ruleset:
-    Domain: ~
-    Application:
-        - Domain
-    Infrastructure:
-        - Domain
-        - Application
+  SharedDomain: ~
+  SharedApplication:
+    - SharedDomain
+  SharedInfrastructure:
+    - SharedDomain
+    - SharedApplication
+  CoreDomain:
+    - SharedDomain
+  CoreApplication:
+    - SharedDomain
+    - SharedApplication
+    - CoreDomain
+  CoreInfrastructure:
+    - SharedDomain
+    - SharedApplication
+    - SharedInfrastructure
+    - CoreDomain
+    - CoreApplication

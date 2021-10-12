@@ -1,3 +1,6 @@
+## see https://editorconfig.org/
+## see https://github.com/RehanSaeed/EditorConfig/blob/main/.editorconfig
+
 root = true
 
 [*]
@@ -13,3 +16,12 @@ insert_final_newline = true
 
 max_line_length = 120
 tab_width = 4
+
+[*.{yml,yaml}]
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
+
+[Makefile]
+indent_style = tab

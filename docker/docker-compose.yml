@@ -1,0 +1,36 @@
+version: "3.7"
+services:
+  php:
+    container_name: api-ddd-template_php
+    build: .
+    ports:
+      - 8080:8080
+    volumes:
+      - ../:/var/www/
+    networks:
+      - base
+    command: symfony serve --port=8080
+    healthcheck:
+      test: curl --fail -s http://localhost:8080 || exit 1
+      interval: 15s
+      timeout: 3s
+      retries: 3
+      start_period: 30s
+  db:
+    container_name: api-ddd-template_db
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/my.cnf
+      - ../migrations:/var/backups/
+    restart: always
+    environment:
+      MYSQL_DATABASE: db_api_ddd_template
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+networks:
+  base:
+volumes:
+  db-data:
+    driver: local
