@@ -39,6 +39,7 @@
         "symfony/yaml": "4.4.*"
     },
     "require-dev": {
+        "behat/behat": "^3.8",
         "bmitch/churn-php": "^1.5",
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "friendsoftwig/twigcs": "^5.0",

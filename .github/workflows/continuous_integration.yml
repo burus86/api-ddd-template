@@ -74,6 +74,10 @@ jobs:
         if: ${{ always() }}
         run: bin/phpunit
 
+      - name: Behat tests
+        if: ${{ always() }}
+        run: bin/behat
+
       - name: PHP Code Sniffer
         if: ${{ always() }}
         run: bin/phpcs src/ tests/

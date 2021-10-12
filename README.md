@@ -9,6 +9,8 @@
     * [Execute all tests](#execute-all-tests)
 1. [Unit Tests](#unit-tests)
     * [PHP Unit](#php-unit)
+1. [Functional Tests](#functional-tests)
+    * [Behat](#behat)
 1. [Code Quality Checker Tools](#code-quality-checker-tools)
     * [PHP_CodeSniffer](#php_codesniffer)
     * [PHPStan](#phpstan)
@@ -31,6 +33,7 @@
 - [x] DDD and Hexagonal architecture
 - [x] Best practices: Clean code, PHP Standards Recommendations (PSR), SOLID principles and design patterns
 - [x] Unit tests: PHP Unit
+- [x] Functional tests: Behat
 - [x] Code Quality Checker Tools: PHP_CodeSniffer, PHPStan, PHP Mess Detector, PHP Magic Number Detector, PHP Copy Paste Detector, Churn-php, PhpDeprecationDetector, Twigcs
 - [x] Code Analysis Tools: Deptrac
 - [x] Exceptions handler
@@ -112,6 +115,12 @@ If you prefer, it's also possible to run each individual test following the inst
 
     make test-phpunit
 
+## Functional Tests
+
+### [Behat](https://github.com/Behat/Behat)
+
+    make test-behat
+
 ## Code Quality Checker Tools
 
 **Source:**
@@ -167,7 +176,7 @@ In order to automatically correct coding standard violations, execute:
 
 The easiest way to [generate full project documentation](https://github.com/phpdocumentor/phpdocumentor) is by running the following command:
 
-    php phpDocumentor.phar -d src -t public/docs
+    make phpdoc
 
 Once generated, you can check the documentation under [http://localhost:8080/docs](http://localhost:8080/docs) in your favorite web browser.
 

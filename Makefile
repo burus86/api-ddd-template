@@ -93,7 +93,7 @@ phpdoc: start
 	@echo
 
 ## Run all tests (unit tests, code style, etc.)
-test: start test-phpunit test-phpcs test-phpstan test-phpmd test-phpmnd test-phpcpd test-churn test-phpdd test-deptrac test-twigcs
+test: start test-phpunit test-behat test-phpcs test-phpstan test-phpmd test-phpmnd test-phpcpd test-churn test-phpdd test-deptrac test-twigcs
 
 ## Run PHP Unit Tests
 test-phpunit: start
@@ -101,6 +101,14 @@ test-phpunit: start
 	@echo "---------------------------"
 	@echo
 	$(RUN) bin/phpunit
+	@echo
+
+## Run Behat Tests
+test-behat: start
+	@echo "Run Behat Tests"
+	@echo "---------------------------"
+	@echo
+	$(RUN) bin/behat
 	@echo
 
 ## Run PHP_CodeSniffer and detect violations of a defined coding standard
